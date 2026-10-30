@@ -1,0 +1,198 @@
+/* ---------- Variables ---------- */
+:root {
+  --violet: #7c3aed;
+  --violet-dark: #5b21b6;
+  --violet-light: #a78bfa;
+  --white: #ffffff;
+  --black: #0d0a14;
+  --card-bg: #ffffff;
+  --text: #1a1424;
+  --muted: #6b6478;
+  --radius: 28px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: var(--black);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* ---------- Fond animé ---------- */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  z-index: 0;
+  animation: float 12s ease-in-out infinite;
+}
+.orb-1 { width: 380px; height: 380px; background: var(--violet); top: -100px; left: -100px; }
+.orb-2 { width: 320px; height: 320px; background: var(--violet-dark); bottom: -90px; right: -90px; animation-delay: -6s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(40px, 30px); }
+}
+
+/* ---------- Carte ---------- */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  min-height: 460px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 80px rgba(124, 58, 237, 0.35);
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card.shake { animation: shake 0.6s; }
+
+.screen {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.screen.active { display: flex; animation: pop 0.45s cubic-bezier(.2, 1.2, .4, 1); }
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Textes ---------- */
+h1 { font-size: 2rem; letter-spacing: 0.04em; }
+h2 { font-size: 1.6rem; }
+.subtitle { color: var(--violet); font-weight: 600; }
+.info { color: var(--muted); line-height: 1.5; }
+.fineprint { color: var(--muted); font-size: 0.8rem; margin-top: 6px; }
+
+/* ---------- Icône Wi-Fi ---------- */
+.wifi-icon {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.45);
+}
+.wifi-icon path:nth-child(1) { animation: signal 2s infinite; }
+.wifi-icon path:nth-child(2) { animation: signal 2s infinite 0.25s; }
+.wifi-icon path:nth-child(3) { animation: signal 2s infinite 0.5s; }
+
+@keyframes signal {
+  0%, 100% { opacity: 0.25; }
+  40%      { opacity: 1; }
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+.btn:hover  { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(124, 58, 237, 0.5); }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 3px solid var(--violet-light); outline-offset: 3px; }
+
+.btn-secondary { background: var(--black); box-shadow: 0 8px 20px rgba(13, 10, 20, 0.35); }
+
+/* ---------- Chargement ---------- */
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 6px solid #ece6fb;
+  border-top-color: var(--violet);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.progress {
+  width: 100%;
+  height: 10px;
+  background: #ece6fb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--violet-light), var(--violet));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* ---------- Révélation ---------- */
+.emoji-big {
+  font-size: 5rem;
+  line-height: 1;
+  animation: bounce 0.9s ease infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-14px) rotate(6deg); }
+}
+.reveal-text { font-size: 1.1rem; line-height: 1.6; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+/* ---------- Confettis ---------- */
+.confetti-layer { position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
+.confetti {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(105vh) rotate(720deg); opacity: 0.9; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .card { padding: 32px 22px; min-height: 420px; }
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.4rem; }
+}
+
+/* ---------- Accessibilité : réduire les animations ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
